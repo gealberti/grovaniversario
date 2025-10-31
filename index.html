@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grovaniversários!</title>
+    <link rel="icon" href="flor.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #ece3da;
+            --red-primary: #ba3e39;
+            --red-secondary: #e32929;
+            --green: #788c5c;
+            --text-color: #333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+            position: relative;
+            overflow-x: hidden;
+            flex-direction: column;
+        }
+
+        .decoration {
+            position: absolute;
+            opacity: 0.7;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .deco-wine {
+            top: 5%;
+            left: -20px;
+            width: 100px;
+            transform: rotate(-15deg);
+        }
+
+        .deco-flower-1 {
+            top: 15%;
+            right: -30px;
+            width: 120px;
+            transform: rotate(15deg);
+        }
+
+        .deco-flower-2 {
+            bottom: 5%;
+            left: -40px;
+            width: 150px;
+            transform: rotate(-25deg);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(186, 62, 57, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-sizing: border-box;
+            /* Garante que padding não afete a largura total */
+        }
+
+        .invitation-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 2rem;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .countdown-item span {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--red-primary);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .countdown-item p {
+            margin: 0;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-color);
+        }
+
+        .party-started {
+            color: var(--green);
+            font-size: 1.5rem;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .cta-buttons,
+        .social-buttons {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-buttons {
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2.5rem;
+        }
+
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-item p {
+            font-size: 0.8rem;
+            color: var(--text-color);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button i {
+            margin-right: 0.75rem;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-rsvp {
+            background-color: var(--red-primary);
+            color: var(--bg-color);
+        }
+
+        .btn-calendar {
+            background-color: var(--green);
+            color: var(--bg-color);
+        }
+
+        .btn-map {
+            background-color: #ffffff;
+            color: var(--red-primary);
+            border: 2px solid var(--red-primary);
+        }
+
+        .btn-gifts,
+        .btn-instagram {
+            color: var(--red-primary);
+            font-size: 2rem;
+            padding: 0.5rem;
+            background: none;
+            border: none;
+            transition: transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-gifts:hover,
+        .btn-instagram:hover {
+            transform: scale(1.1);
+            box-shadow: none;
+        }
+
+        .rsvp-form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .rsvp-form-container.active {
+            display: block;
+        }
+
+        .rsvp-form h3 {
+            color: var(--red-primary);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .rsvp-form label {
+            display: block;
+            text-align: left;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .rsvp-form input[type="text"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .rsvp-form button {
+            background-color: var(--green);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        .rsvp-form button:hover {
+            background-color: #5d744b;
+        }
+
+        .thank-you-message {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--red-primary);
+            display: none;
+            line-height: 1.4;
+        }
+
+        .thank-you-message.active {
+            display: block;
+        }
+
+        /* --- MELHORIAS DE RESPONSIVIDADE --- */
+
+        /* Para desktops: um pouco mais largo para melhor aproveitar o espaço */
+        @media (min-width: 768px) {
+            main {
+                max-width: 480px;
+            }
+
+            .deco-wine {
+                top: 10%;
+                left: 15%;
+                width: 120px;
+            }
+
+            .deco-flower-1 {
+                top: 20%;
+                right: 12%;
+                width: 140px;
+            }
+
+            .deco-flower-2 {
+                bottom: 15%;
+                left: 20%;
+                width: 170px;
+            }
+        }
+
+        /* Para celulares muito estreitos: evita que a contagem fique apertada */
+        @media (max-width: 360px) {
+            .countdown-item span {
+                font-size: 2rem;
+            }
+
+            .countdown-container {
+                padding: 1rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="vinho.png" alt="" class="decoration deco-wine">
+    <img src="flor.png" alt="" class="decoration deco-flower-1">
+    <img src="flor.png" alt="" class="decoration deco-flower-2">
+
+    <main>
+        <div class="invitation-card">
+            <img src="convite.png" alt="Convite de Aniversário da Grova">
+        </div>
+
+        <div class="countdown-container" id="countdown">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <p>Dias</p>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <p>Horas</p>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <p>Minutos</p>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <p>Segundos</p>
+            </div>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="#" id="showRsvpForm" class="button btn-rsvp">
+                <i class="fas fa-check-circle"></i> Confirmar Presença
+            </a>
+            <div id="rsvpFormContainer" class="rsvp-form-container">
+                <form action="https://send.pageclip.co/abc123def456" method="post" class="rsvp-form" id="rsvpForm">
+                    <h3>Confirme Sua Presença!</h3>
+                    <label for="name">Seu Nome:</label>
+                    <input type="text" id="name" name="name" placeholder="Digite seu nome completo" required>
+                    <button type="submit">Enviar Confirmação</button>
+                </form>
+            </div>
+            <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Aniver+da+Ge&dates=20251120T230000Z/20251121T060000Z&details=N%C3%A3o+esque%C3%A7a+de+confirmar+presen%C3%A7a+at%C3%A9+14/11!+Confirme+aqui:+grovaniversario.com&location=Cortina+Bar+-+Alameda+Dr.+Carlos+de+Carvalho,+1286"
+                target="_blank" class="button btn-calendar">
+                <i class="fas fa-calendar-alt"></i> Adicionar ao Calendário
+            </a>
+            <a href="http://googleusercontent.com/maps.google.com/4" target="_blank" class="button btn-map">
+                <i class="fas fa-map-marked-alt"></i> Ver no Mapa
+            </a>
+        </div>
+
+        <div id="thankYouMessage" class="thank-you-message">
+            Obrigada!!!<br>A gente se ve lá 🎉
+        </div>
+
+        <div class="social-buttons">
+            <div class="social-item">
+                <a href="https://www.amazon.com.br/hz/wishlist/ls/2V8AOM0SFUZ4L?ref_=wl_share" target="_blank"
+                    class="btn-gifts" title="Lista de Presentes">
+                    <i class="fas fa-shopping-bag"></i>
+                </a>
+                <p>lista de gift (se quiserem)</p>
+            </div>
+            <div class="social-item">
+                <a href="https://www.instagram.com/cortinacwb/?hl=pt-br" target="_blank" class="btn-instagram"
+                    title="Instagram do Cortina Bar">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <p>insta do bar</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- SCRIPT DO FORMULÁRIO E SCROLL ---
+        const showRsvpFormButton = document.getElementById('showRsvpForm');
+        const rsvpFormContainer = document.getElementById('rsvpFormContainer');
+        const rsvpForm = document.getElementById('rsvpForm');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+
+        showRsvpFormButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            rsvpFormContainer.classList.toggle('active');
+            if (rsvpFormContainer.classList.contains('active')) {
+                setTimeout(() => {
+                    rsvpFormContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        });
+
+        rsvpForm.addEventListener('submit', function (event) {
+            setTimeout(() => {
+                rsvpFormContainer.classList.remove('active');
+                thankYouMessage.classList.add('active');
+            }, 300);
+        });
+
+        // --- SCRIPT DA CONTAGEM REGRESSIVA ---
+        const countdownElement = document.getElementById('countdown');
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const partyDate = new Date(2025, 10, 20, 20, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = partyDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = '<h3 class="party-started">A festa já começou!</h3>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            daysEl.innerText = String(days).padStart(2, '0');
+            hoursEl.innerText = String(hours).padStart(2, '0');
+            minutesEl.innerText = String(minutes).padStart(2, '0');
+            secondsEl.innerText = String(seconds).padStart(2, '0');
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+    <script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+
+</body>
+
+</html>
