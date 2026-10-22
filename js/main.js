@@ -1,7 +1,7 @@
 // ---------- Config ----------
 const EVENT = {
   title: "Aniversário Geovanna",
-  start: new Date("2026-11-20T20:00:00-03:00"),
+  start: new Date("2026-11-20T20:30:00-03:00"),
   end: new Date("2026-11-21T00:00:00-03:00"),
   location: "41Brooklyn - R. Alferes Poli, 821, Curitiba - PR",
   details: "Especial Justin Bieber\nInstagram do local: https://www.instagram.com/41bklyn/",
