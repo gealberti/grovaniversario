@@ -356,6 +356,8 @@ address { font-style: normal; }
 }
 .rsvp__gifts[aria-disabled="true"] { pointer-events: none; cursor: default; }
 
+.rsvp .title { margin-bottom: .5rem; }
+.rsvp__plus { color: var(--grey); margin: 0 auto clamp(28px, 5vw, 56px); max-width: 460px; }
 .rsvp__note { max-width: 460px; margin: 1.6rem auto 0; color: #ddd; font-size: 1.15rem; }
 .rsvp__note a { color: var(--white); text-underline-offset: 3px; }
 .rsvp__note a:hover { color: var(--red); }
